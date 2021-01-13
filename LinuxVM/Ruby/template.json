@@ -13,7 +13,7 @@
       "type": "string",
       "defaultValue": "AzureOSSLinuxVM",
       "metadata": {
-        "description": "The name of you Virtual Machine."
+        "description": "The name of your Virtual Machine, this will be also updating the dns record"
       }
     },
     "authenticationType": {
