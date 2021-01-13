@@ -100,7 +100,7 @@
           {
             "name": "SSH",
             "properties": {
-              "priority": 1000,
+              "priority": 101,
               "protocol": "TCP",
               "access": "Allow",
               "direction": "Inbound",
