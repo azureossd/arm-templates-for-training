@@ -109,6 +109,19 @@
               "destinationAddressPrefix": "*",
               "destinationPortRange": "22"
             }
+          },
+          {
+            "name": "RUBY",
+            "properties": {
+              "priority": 102,
+              "protocol": "TCP",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "3000"
+            }
           }
         ]
       }
