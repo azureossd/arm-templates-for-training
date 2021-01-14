@@ -226,7 +226,7 @@
               "autoUpgradeMinorVersion": true,
               "settings": {
                 "fileUris": ["https://raw.githubusercontent.com/azureossd/general-scripts/master/Linux/install_ruby_specific_version_rbenv.sh"],
-                "commandToExecute": "sudo sh install_ruby_specific_version_rbenv.sh"
+                "commandToExecute": "[concat('sudo sh install_ruby_specific_version_rbenv.sh ',variables('adminUsername'))]"
               }
             }
     }
