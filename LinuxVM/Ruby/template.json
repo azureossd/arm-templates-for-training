@@ -137,6 +137,9 @@
             "[variables('addressPrefix')]"
           ]
         },
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
+        ],
         "subnets": [
           {
             "name": "[variables('subnetName')]",
