@@ -20,17 +20,16 @@
       "type": "string",
       "defaultValue": "password",
       "allowedValues": [
-        "sshPublicKey",
         "password"
       ],
       "metadata": {
-        "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+        "description": "Type of authentication to use on the Virtual Machine"
       }
     },
     "adminPasswordOrKey": {
       "type": "securestring",
       "metadata": {
-        "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+        "description": "Password for the Virtual Machine"
       }
     }
   },
@@ -48,14 +47,8 @@
     "subnetAddressPrefix": "10.1.0.0/24",
     "addressPrefix": "10.1.0.0/16",
     "linuxConfiguration": {
-      "disablePasswordAuthentication": true,
-      "ssh": {
-        "publicKeys": [
-          {
-            "path": "[concat('/home/', variables('adminUsername'), '/.ssh/authorized_keys')]",
-            "keyData": "[parameters('adminPasswordOrKey')]"
-          }
-        ]
+      "patchSettings": {
+        "patchMode": "ImageDefault"
       }
     }
   },
@@ -170,12 +163,12 @@
         "dnsSettings": {
           "domainNameLabel": "[variables('linuxDNSNameForPublicIP')]"
         },
-        "idleTimeoutInMinutes": 4
+        "idleTimeoutInMinutes": 30
       }
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2022-03-01",
       "name": "[variables('linuxServerName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
@@ -193,9 +186,9 @@
             }
           },
           "imageReference": {
-            "publisher": "Canonical",
-            "offer": "UbuntuServer",
-            "sku": "18.04-LTS",
+            "publisher": "canonical",
+            "offer": "0001-com-ubuntu-server-focal",
+            "sku": "20_04-lts-gen2",
             "version": "latest"
           }
         },
@@ -228,8 +221,8 @@
               "typeHandlerVersion": "2.0",
               "autoUpgradeMinorVersion": true,
               "settings": {
-                "fileUris": ["https://raw.githubusercontent.com/azureossd/general-scripts/master/Linux/install_ruby_specific_version_rbenv.sh"],
-                "commandToExecute": "[concat('sudo sh install_ruby_specific_version_rbenv.sh ',variables('adminUsername'))]"
+                "fileUris": ["https://raw.githubusercontent.com/azureossd/general-scripts/master/Linux/install-ruby-wsl-ubuntu20.sh"],
+                "commandToExecute": "[concat('sudo sh install-ruby-wsl-ubuntu20.sh ',variables('adminUsername'))]"
               }
             }
     }
